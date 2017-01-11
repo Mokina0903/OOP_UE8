@@ -8,7 +8,7 @@ public class Branch {
 
     private Element elem; //Nuts and Squirrels
     private LinkedList<Branch> neighbors = null;
-    private char branchChar = 'x';
+    private char branchChar = '+';
 
     private boolean free = true;
     private boolean containsNut = false; //is here a nut?
@@ -50,7 +50,7 @@ public class Branch {
     }
 
     public void clear() {
-        this.branchChar = 'x';
+        this.branchChar = '+';
         this.free = true;
         this.elem = null;
     }

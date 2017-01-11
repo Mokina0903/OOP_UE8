@@ -98,10 +98,18 @@ public class Tree {
 
     public synchronized void setEnd() {
         if (!ended) {
-            System.out.println("Tree: \n" + this.toString());
+            System.out.println("End: \n" + this.toString());
+
+            for (int i = 0; i < dimension; i++) {
+                for (int j = 0; j < dimension; j++) {
+                    if (getBranch(i, j).getElem() instanceof Squirrel) {
+                        System.out.println(getBranch(i, j).getElem());
+                    }
+                }
+            }
+
             ended = true;
         }
-        System.out.println("Tree: \n" + this.toString());
     }
 
     public boolean noNutsLeft() {
@@ -133,39 +141,5 @@ public class Tree {
         return sb.toString();
     }
 
-    //Methods just for testing
-    public void printSquirrels() {
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                if (branches[i][j].getElem() instanceof Squirrel) {
-                    System.out.print(i + "," + j + " ; ");
-                    System.out.println(branches[i][j].getElem());
-                }
-            }
-        }
-        System.out.println();
-    }
-
-    public void printNuts() {
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                if (branches[i][j].getElem() instanceof Nut) {
-                    System.out.print(i + "," + j + " ; ");
-                }
-            }
-        }
-        System.out.println();
-    }
-
-    public void printTakenBranches() {
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                if (!branches[i][j].getFree()) {
-                    System.out.print(i + "," + j + " ; ");
-                }
-            }
-        }
-        System.out.println();
-    }
 
 }

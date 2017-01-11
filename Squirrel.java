@@ -45,14 +45,14 @@ public class Squirrel extends Element {
     public void run() {
 
         Branch b = position[0];
-        while (steps < 32 && !b.noNutsLeft()  && !Thread.interrupted() && !b.getEnd()) {
+        while (steps < 32 && !b.noNutsLeft()  && !Thread.interrupted() && !b.noNutsLeft()) {
 
             //search for accessible nut and go there is available
             if (accessibleNut() != null) {
                 Branch newBranch = accessibleNut();
                 //the nut and/or branch could be already taken while waiting, so another check is made
                 synchronized (newBranch) {
-                    if (newBranch.getFree() || newBranch.getContainsNut()) {
+                    if (newBranch.getContainsNut()) {
                         moving(newBranch);
                         newBranch.setContainsNut(false);
                         nutsEaten++;
@@ -88,13 +88,12 @@ public class Squirrel extends Element {
                 Thread.currentThread().interrupt();
             }
 
-            //end if 32 steps reached or no Nuts left
-            System.out.println(b.getTree());
-
-            if (!Thread.interrupted() && (steps >= 32 || b.noNutsLeft()) ) {
-                b.setEndProgram();
-            }
         }
+        //end if 32 steps reached or no Nuts left
+        if (!Thread.interrupted() && (steps >= 32 || b.noNutsLeft()) ) {
+            b.setEndProgram();
+        }
+
     }
 
     //clears old branches and moves to new position
