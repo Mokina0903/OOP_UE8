@@ -91,6 +91,14 @@ public class Branch {
         tree.setEnd();
     }
 
+    public boolean getEnd() {
+        return tree.getEnded();
+    }
+
+    public Tree getTree(){
+        return tree;
+    }
+
     @Override
     public String toString() {
         return x + "," + y;

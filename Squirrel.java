@@ -45,7 +45,7 @@ public class Squirrel extends Element {
     public void run() {
 
         Branch b = position[0];
-        while (steps < 32 && !b.noNutsLeft()  && !Thread.interrupted()) {
+        while (steps < 32 && !b.noNutsLeft()  && !Thread.interrupted() && !b.getEnd()) {
 
             //search for accessible nut and go there is available
             if (accessibleNut() != null) {
@@ -88,7 +88,8 @@ public class Squirrel extends Element {
             }
 
             //end if 32 steps reached or no Nuts left
-            System.out.println(this);
+            System.out.println(b.getTree());
+
             if (!Thread.interrupted() && (steps >= 32 || b.noNutsLeft()) ) {
                 b.setEndProgram();
             }
