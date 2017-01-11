@@ -11,7 +11,7 @@ public class Branch {
     private char branchChar = 'x';
 
     private boolean free = true;
-    private boolean nutNeighbor = false; //is a nut accessible?
+    private boolean containsNut = false; //is here a nut?
 
     private Thread t;
 
@@ -40,11 +40,19 @@ public class Branch {
 
     public void setElem(Element elem) {
         this.elem = elem;
+        this.free = false;
     }
 
+    //if taken by a squirrel
     public void setBranchChar(char c) {
         this.branchChar = c;
         this.free = false;
+    }
+
+    public void clear() {
+        this.branchChar = 'x';
+        this.free = true;
+        this.elem = null;
     }
 
     public char getBranchChar() {
@@ -67,4 +75,20 @@ public class Branch {
         return neighbors;
     }
 
+    public void setContainsNut(boolean b) {
+        containsNut = b;
+    }
+
+    public boolean getContainsNut () {
+        return containsNut;
+    }
+
+    public void setEndProgram() {
+        tree.setEnd();
+    }
+
+    @Override
+    public String toString() {
+        return x + "," + y;
+    }
 }

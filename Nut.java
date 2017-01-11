@@ -12,6 +12,7 @@ public class Nut extends Element {
     public void setBranchChar() {
         branch.setBranchChar('o');
         branch.setElem(this);
+        branch.setContainsNut(true);
     }
 
 

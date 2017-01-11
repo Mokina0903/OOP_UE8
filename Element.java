@@ -9,4 +9,8 @@ public abstract class Element implements Runnable {
 
     public abstract void setBranchChar();
 
+    public Branch getBranch() {
+        return branch;
+    }
+
 }

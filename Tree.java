@@ -1,3 +1,5 @@
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -6,6 +8,9 @@ public class Tree {
     private final int dimension; // between 1 and 80
 
     private Branch[][] branches = null;
+
+    private boolean nutsLeft = true; //ends programm if all nuts are eaten
+    private boolean ended;
 
     public Tree(int dimension, int squirrel, int nut) {
         this.dimension = dimension;
@@ -38,21 +43,13 @@ public class Tree {
 
         if (x > 0) {
             list.add(getBranch(x - 1, y));
-            /*if (y < dimension - 1)
-                list.add(getBranch(x - 1, y + 1));
-            if (y > 0)
-                list.add(getBranch(x - 1, y - 1));*/
         }
 
         if (y > 0) {
             list.add(getBranch(x, y - 1));
-            /*if (x < dimension - 1)
-                list.add(getBranch(x + 1, y - 1));*/
         }
         if (x < dimension - 1) {
             list.add(getBranch(x + 1, y));
-           /* if (y < dimension - 1)
-                list.add(getBranch(x + 1, y + 1));*/
         }
 
         if (y < dimension - 1)
@@ -100,6 +97,16 @@ public class Tree {
         return branches[i][j];
     }
 
+    public synchronized void setEnd() {
+        if (!ended) {
+            System.out.println("Tree: \n" + this.toString());
+            ended = true;
+        }
+    }
+
+    public boolean getEnded() {
+        return ended;
+    }
 
     @Override
     public String toString() {
@@ -121,6 +128,7 @@ public class Tree {
             for (int j = 0; j < dimension; j++) {
                 if (branches[i][j].getElem() instanceof Squirrel) {
                     System.out.print(i + "," + j + " ; ");
+                    System.out.println(branches[i][j].getElem());
                 }
             }
         }
@@ -148,4 +156,5 @@ public class Tree {
         }
         System.out.println();
     }
+
 }

@@ -5,22 +5,26 @@ public class Test {
 
         //Test1
         Tree t1 = new Tree(5, 2, 1);
-        System.out.println(t1);
+        System.out.println("Start -------\n" + t1);
         System.out.println();
 
+      /*  t1.startThreads();
+        while (!t1.getEnded())
+            ;*/
+
         //Test2
-        Tree t2 = new Tree(10, 5, 7);
+   /*    Tree t2 = new Tree(10, 5, 7);
         System.out.println(t2);
-        System.out.println();
+        System.out.println();*/
 
 
         //just for testing
         System.out.println("SQUIRRELS: ");
-        t2.printSquirrels();
+        t1.printSquirrels();
         System.out.println("NUTS: ");
-        t2.printNuts();
-        System.out.println("NOT FREE: ");
-        t2.printTakenBranches();
+        t1.printNuts();
+/*        System.out.println("NOT FREE: ");
+        t1.printTakenBranches();*/
 
         //Test3
     }
