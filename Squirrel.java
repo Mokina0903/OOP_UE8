@@ -6,10 +6,14 @@ public class Squirrel extends Element {
     private int steps = 0; //interrupts, when 32 is reached
     private int nutsEaten = 0; // counts the nuts that this squirrel has eaten
 
+    static int idCount = 0;
+    private final int ID;
+
     public Squirrel(Branch branch) {
         super(branch);
         position[0] = branch;
         position[1] = getRandomNeighbor();
+        ID = ++idCount;
     }
 
     //adds random neighbor that is free for 2nd branch
@@ -36,12 +40,12 @@ public class Squirrel extends Element {
         branch.setBranchChar(c);
     }
 
-    //todo: implementation
+
     @Override
     public void run() {
 
-        Branch b = super.getBranch();
-        while (steps < 32 && !Thread.interrupted()) {
+        Branch b = position[0];
+        while (steps < 32 && !b.noNutsLeft()  && !Thread.interrupted()) {
 
             //search for accessible nut and go there is available
             if (accessibleNut() != null) {
@@ -68,22 +72,30 @@ public class Squirrel extends Element {
                 }
                 }
             }
-
-            //wait
+            //wait if can't move
             else {
                 try {
-                    Thread.sleep(35);
+                    Thread.sleep(15);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
             }
+            //wait
+            try {
+                Thread.sleep(25);
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
 
-            if (!Thread.interrupted() && steps >= 32) {
+            //end if 32 steps reached or no Nuts left
+            System.out.println(this);
+            if (!Thread.interrupted() && (steps >= 32 || b.noNutsLeft()) ) {
                 b.setEndProgram();
             }
         }
     }
 
+    //clears old branches and moves to new position
     private void moving(Branch branch) {
         position[0].clear();
         position[1].clear();
@@ -117,6 +129,6 @@ public class Squirrel extends Element {
 
     @Override
     public String toString() {
-        return "Steps: " + this.steps;
+        return ID + " - Steps: " + this.steps + ", nuts eaten: " + nutsEaten;
     }
 }

@@ -55,6 +55,10 @@ public class Branch {
         this.elem = null;
     }
 
+    public boolean noNutsLeft() {
+       return tree.noNutsLeft();
+    }
+
     public char getBranchChar() {
         return branchChar;
     }

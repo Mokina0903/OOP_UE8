@@ -7,9 +7,9 @@ public class Tree {
 
     private final int dimension; // between 1 and 80
 
+    //2d Array built by constructor and never changed again.
     private Branch[][] branches = null;
 
-    private boolean nutsLeft = true; //ends programm if all nuts are eaten
     private boolean ended;
 
     public Tree(int dimension, int squirrel, int nut) {
@@ -86,7 +86,7 @@ public class Tree {
     public synchronized void startThreads() {
         for (int i = 0; i < dimension; i++) {
             for (int j = 0; j < dimension; j++) {
-                if (!getBranch(i, j).getFree()) {
+                if (getBranch(i, j).getElem() instanceof Squirrel) {
                     getBranch(i, j).startThread();
                 }
             }
@@ -102,6 +102,18 @@ public class Tree {
             System.out.println("Tree: \n" + this.toString());
             ended = true;
         }
+        System.out.println("Tree: \n" + this.toString());
+    }
+
+    public boolean noNutsLeft() {
+        for (int i = 0; i < dimension; i++) {
+            for (int j = 0; j < dimension; j++) {
+                if (getBranch(i, j).getContainsNut()) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public boolean getEnded() {

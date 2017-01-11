@@ -16,7 +16,6 @@ public class Nut extends Element {
     }
 
 
-    //todo: implementation
     @Override
     public void run() {
 
