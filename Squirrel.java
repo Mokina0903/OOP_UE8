@@ -52,9 +52,10 @@ public class Squirrel extends Element {
                 Branch newBranch = accessibleNut();
                 //the nut and/or branch could be already taken while waiting, so another check is made
                 synchronized (newBranch) {
-                    if (newBranch.getFree()) {
+                    if (newBranch.getFree() || newBranch.getContainsNut()) {
                         moving(newBranch);
                         newBranch.setContainsNut(false);
+                        nutsEaten++;
                         steps++;
                     }
                 }
